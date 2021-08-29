@@ -22,7 +22,8 @@
     <p>
         <i class="fas fa-info-circle"></i>
         @lang('dedipasspayment::messages.setup', [
-            'url' => '<code>'.route('shop.payments.notification', 'dedipass').'</code>',
+            'url' => '<code>'.route('home').'</code>',
+            'ipn' => '<code>'.route('shop.payments.notification', 'dedipass').'</code>',
             'money' => money_name(1),
         ])
     </p>

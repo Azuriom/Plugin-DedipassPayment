@@ -5,7 +5,6 @@ namespace Azuriom\Plugin\DedipassPayment;
 use Azuriom\Models\User;
 use Azuriom\Plugin\Shop\Cart\Cart;
 use Azuriom\Plugin\Shop\Models\Payment;
-use Azuriom\Plugin\Shop\Models\PaymentItem;
 use Azuriom\Plugin\Shop\Payment\PaymentMethod;
 use Illuminate\Http\Request;
 
@@ -54,9 +53,7 @@ class DediPassMethod extends PaymentMethod
             return response()->json(['status' => 'error', 'message' => 'Invalid private key']);
         }
 
-        $useLegacyShop = ! class_exists(PaymentItem::class);
-
-        if (Payment::where($useLegacyShop ? 'payment_id' : 'transaction_id', $code)
+        if (Payment::where('transaction_id', $code)
             ->where('created_at', '>', now()->subMinute())
             ->exists()) {
             //logger()->warning('[Shop] Dedipass - Payment already completed: '.$code);
@@ -88,23 +85,7 @@ class DediPassMethod extends PaymentMethod
         $user->addMoney($money);
         $user->save();
 
-        // TODO remove shop 0.1.x compatibility
-        if ($useLegacyShop) {
-            Payment::forceCreate([
-                'user_id' => $user->id,
-                'price' => $price,
-                'currency' => 'EUR',
-                'payment_type' => $this->id,
-                'status' => 'DELIVERED',
-                'items' => 'Money: '.$money,
-                'payment_id' => $code,
-                'type' => 'OFFER',
-            ]);
-
-            return response()->json(['status' => 'success']);
-        }
-
-        Payment::create([
+        $payment = Payment::create([
             'user_id' => $user->id,
             'price' => $price,
             'currency' => 'EUR',
@@ -112,6 +93,8 @@ class DediPassMethod extends PaymentMethod
             'status' => 'completed',
             'transaction_id' => $code,
         ]);
+
+        $payment->deliver();
 
         return response()->json(['status' => 'success']);
     }

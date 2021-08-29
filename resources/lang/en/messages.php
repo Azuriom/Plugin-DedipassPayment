@@ -1,7 +1,7 @@
 <?php
 
 return [
-    'setup' => 'On the Dedipass dashboard you need to select virtual currency with IPN callback and set the redirect URL to :url. You can configure the offers on the Dedipass dashboard.',
+    'setup' => 'On the Dedipass dashboard you need to select virtual currency, set the installation URL to :url then choose IPN callback and set the callback URL to :ipn. You can configure the offers on the Dedipass dashboard.',
 
     'keys' => 'Get the keys',
 
