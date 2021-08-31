@@ -94,6 +94,16 @@ class DediPassMethod extends PaymentMethod
             'transaction_id' => $code,
         ]);
 
+        $payment->items()
+                ->make([
+                    'name' => format_money($money),
+                    'price' => $price,
+                    'quantity' => 1,
+                ])->forceFill([
+                    'buyable_type' => 'shop.offers',
+                    'buyable_id' => 0,
+                ])->save();
+
         $payment->deliver();
 
         return response()->json(['status' => 'success']);
