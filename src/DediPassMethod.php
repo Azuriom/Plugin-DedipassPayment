@@ -96,7 +96,7 @@ class DediPassMethod extends PaymentMethod
 
         $payment->items()
                 ->make([
-                    'name' => $money.' '.money_name($money),
+                    'name' => format_money($money),
                     'price' => $price,
                     'quantity' => 1,
                 ])->forceFill([
