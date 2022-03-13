@@ -2,13 +2,14 @@
     "id": "dedipasspayment",
     "name": "DedipassPayment",
     "description": "Plugin to add Dedipass to the shop's payment methods.",
-    "version": "0.1.6",
-    "url": "https://azuriom.com/market/resources/6",
+    "version": "1.0.0",
+    "url": "https://market.azuriom.com/resources/6",
     "authors": [
         "Azuriom"
     ],
     "providers": [
         "\\Azuriom\\Plugin\\DedipassPayment\\Providers\\DedipassPaymentServiceProvider"
     ],
+    "azuriom_api": "1.0.0",
     "apiId": 6
 }
