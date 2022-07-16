@@ -109,11 +109,6 @@ class DediPassMethod extends PaymentMethod
         return response()->json(['status' => 'success']);
     }
 
-    public function success(Request $request)
-    {
-        return view('shop::payments.success');
-    }
-
     public function view()
     {
         return 'dedipasspayment::admin.dedipass';
