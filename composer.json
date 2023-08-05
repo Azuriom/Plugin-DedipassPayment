@@ -1,7 +1,7 @@
 {
     "name": "azuriom/dedipasspayment",
     "type": "azuriom-plugin",
-    "description": "Dedipass payment for the Shop",
+    "description": "Add Dedipass to the shop's payment methods.",
     "license": "MIT",
     "autoload": {
         "psr-4": {

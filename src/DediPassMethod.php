@@ -109,12 +109,12 @@ class DediPassMethod extends PaymentMethod
         return response()->json(['status' => 'success']);
     }
 
-    public function view()
+    public function view(): string
     {
         return 'dedipasspayment::admin.dedipass';
     }
 
-    public function rules()
+    public function rules(): array
     {
         return [
             'public-key' => ['required', 'string'],
@@ -122,12 +122,12 @@ class DediPassMethod extends PaymentMethod
         ];
     }
 
-    public function image()
+    public function image(): string
     {
         return asset('plugins/dedipasspayment/img/dedipass.png');
     }
 
-    public function hasFixedAmount()
+    public function hasFixedAmount(): bool
     {
         return true;
     }
